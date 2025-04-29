@@ -1,0 +1,561 @@
+/* style.css */
+
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+    --primary-color: #7c4dff;
+    --primary-darker: #5e35b1;
+    --accent-color: #ff0000; /* YouTube Red */
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --dark-grey: #424242;
+    --medium-grey: #666;
+    --light-grey-text: #e0e0e0;
+    --footer-link-color: #d1c4e9;
+    --card-bg: #f0eaff;
+    --card-border: #e0d6ff;
+    --text-color: #333;
+    --focus-outline-color: var(--primary-color); /* Use primary color for focus */
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-light: #eee;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+}
+
+/* Global Styles */
+body {
+    font-family: var(--font-stack);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    /* Potential Font Loading Improvement: Add @font-face rules here if using custom web fonts */
+    /* Example:
+    @font-face {
+        font-family: 'YourFont';
+        src: url('yourfont.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap; /* Crucial for performance/UX */
+    }
+    */
+}
+
+html {
+    scroll-behavior: smooth; /* Functional Improvement: Smooth scroll for # links */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Accessibility Improvement: Clearer focus states */
+a:focus, button:focus, input[type="email"]:focus, .modal-close:focus {
+    outline: 3px solid var(--focus-outline-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.3); /* Optional subtle glow */
+}
+/* Remove default outline when custom focus is applied */
+a:focus:not(:focus-visible), button:focus:not(:focus-visible), input:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+/* Style focus states only when needed (keyboard navigation) */
+a:focus-visible, button:focus-visible, input:focus-visible, .modal-close:focus-visible {
+     outline: 3px solid var(--focus-outline-color);
+     outline-offset: 2px;
+     box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.3);
+}
+
+
+/* Accessibility: Skip Link */
+.skip-link {
+    position: absolute;
+    top: -50px; /* Positioned off-screen */
+    left: 10px;
+    background: var(--dark-grey);
+    color: var(--white);
+    padding: 10px 15px;
+    z-index: 10000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0 0 4px 4px;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 0; /* Bring on-screen when focused */
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    /* Example using img:
+    <a href="#" aria-label="Talking Book Home"><img src="logo.png" alt="Talking Book Logo" height="40"></a>
+    */
+}
+.logo a {
+    color: var(--white);
+    text-decoration: none;
+}
+.logo a:hover, .logo a:focus {
+    text-decoration: underline;
+}
+
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+header p.subtitle {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 1rem auto;
+    opacity: 0.9;
+}
+
+header p.credibility {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Main Content */
+/* Added ID for Skip Link Target */
+main#main-content {
+    padding: 3rem 0;
+}
+
+.content-section {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    /* Design Improvement: Subtle separator */
+    border-bottom: 1px solid var(--border-light);
+}
+.content-section:last-of-type {
+     border-bottom: none; /* Don't add border to the last section */
+}
+
+
+h2 {
+    color: var(--primary-darker);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+}
+
+h2 .section-icon {
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
+    color: var(--primary-color); /* Lighter purple for icon */
+}
+
+/* Content Types */
+.content-types {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* HTML Semantic Improvement: using <article> */
+article.content-type {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--card-border);
+    display: flex; /* Added for potential vertical alignment */
+    flex-direction: column; /* Stack content vertically */
+}
+
+article.content-type:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(94, 53, 177, 0.15); /* Use purple shadow */
+}
+
+article.content-type h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-darker);
+    display: flex;
+    align-items: center;
+}
+
+article.content-type h3 .type-icon {
+    margin-right: 0.6rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+     min-width: 20px; /* Ensure alignment even if icon width varies */
+}
+
+article.content-type p {
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Allow paragraph to grow, pushing link down */
+}
+
+
+.featured-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--medium-grey);
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Design Improvement: Card CTA Styling */
+.card-cta-link {
+    color: var(--primary-darker);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block; /* Or block if you want full width */
+    margin-top: auto; /* Pushes link to bottom if flex column */
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent; /* Placeholder for potential border on hover */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-cta-link .fas, .card-cta-link .fab { /* Ensure icon aligns if present */
+    margin-right: 5px;
+}
+
+.card-cta-link:hover, .card-cta-link:focus {
+    background-color: var(--primary-darker);
+    color: var(--white);
+    text-decoration: none; /* Remove underline on hover if styled like button */
+    border-color: var(--primary-darker);
+}
+
+/* Content Improvement: Added CTA text style */
+.subscribe-cta {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--primary-darker);
+    background-color: var(--card-bg); /* Light background for emphasis */
+    border-radius: 8px;
+}
+.subscribe-cta a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+.subscribe-cta a:hover {
+    color: var(--primary-darker);
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--dark-grey);
+    color: var(--light-grey-text);
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+}
+
+/* Design Improvement: Footer Layout */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Footer Links & Social Links Container */
+.footer-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%; /* Take full width for potential layout changes */
+}
+
+/* Footer Links & Social Links Styling */
+.footer-links a, /* Legal Links */
+.social-links a { /* Social Links */
+    color: var(--footer-link-color);
+    /* TODO: Verify color contrast meets WCAG AA for #d1c4e9 on #424242 */
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease, text-decoration 0.2s ease;
+}
+
+.footer-links a:hover, .footer-links a:focus,
+.social-links a:hover, .social-links a:focus {
+    text-decoration: underline;
+    color: var(--white); /* White on hover */
+}
+
+.social-links {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.social-links a {
+    font-size: 1.6rem; /* Slightly larger icons */
+}
+.social-links a i {
+    transition: transform 0.3s ease; /* Micro-interaction */
+}
+.social-links a:hover i, .social-links a:focus i {
+    transform: scale(1.2); /* Slightly scale icon on hover/focus */
+}
+
+/* Functional Improvement: Newsletter Form */
+.newsletter-form {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 400px; /* Limit width */
+}
+.newsletter-form form {
+    display: flex;
+    flex-direction: column; /* Stack label, input/button, message */
+    align-items: center;
+}
+
+.newsletter-form label {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 1rem; /* Slightly larger label */
+    font-weight: 600;
+}
+.newsletter-form .input-group {
+     display: flex;
+     width: 100%; /* Make input/button group take form width */
+     margin-bottom: 0.5rem; /* Space before message */
+}
+
+.newsletter-form input[type="email"] {
+    padding: 12px;
+    border: 1px solid var(--medium-grey);
+    border-radius: 4px 0 0 4px; /* Round left corners */
+    background-color: #555;
+    color: var(--white);
+    flex-grow: 1; /* Take available space */
+    min-width: 150px; /* Ensure minimum width */
+    border-right: none; /* Remove border between input and button */
+}
+.newsletter-form button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 0 4px 4px 0; /* Round right corners */
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text wrapping */
+}
+.newsletter-form button:hover, .newsletter-form button:focus {
+    background-color: var(--primary-darker);
+}
+
+/* Newsletter Feedback Message Styling */
+.form-message {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    min-height: 1.2em; /* Reserve space to prevent layout shift */
+    width: 100%; /* Match form width */
+    text-align: center;
+}
+.form-message.success {
+    color: var(--success-color);
+    font-weight: bold;
+}
+.form-message.error {
+    color: var(--error-color);
+    font-weight: bold;
+}
+
+
+footer p.copyright {
+     font-size: 0.85rem;
+     color: #bdbdbd; /* Dimmer color for copyright */
+     margin-top: 1.5rem;
+}
+
+/* YouTube Button */
+.youtube-button {
+    display: inline-flex; /* Use flex for icon alignment */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.youtube-button:hover, .youtube-button:focus {
+    background-color: #cc0000; /* Darker red */
+    transform: scale(1.03); /* Slight scale effect */
+}
+
+/* Functional Improvement: Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+#back-to-top:hover, #back-to-top:focus {
+    background-color: var(--primary-darker);
+    transform: translateY(-3px);
+}
+
+
+/* Functional Improvement: Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll *if needed* on the overlay */
+    background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Allow scrolling *within* the content box */
+}
+.modal-close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 5px; /* Easier click target */
+    line-height: 1; /* Prevent extra spacing */
+    transition: color 0.3s ease;
+}
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+}
+.modal h2 {
+     margin-top: 0;
+     color: var(--primary-darker);
+     margin-bottom: 1.5rem; /* Add space below heading */
+}
+.modal p {
+    margin-bottom: 1rem; /* Space between paragraphs */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p.subtitle {
+        font-size: 1rem;
+    }
+
+    .content-types {
+        grid-template-columns: 1fr; /* Stack cards */
+    }
+
+    article.content-type {
+        padding: 1rem;
+    }
+
+    /* Adjust footer layout for better stacking */
+    .footer-content {
+        gap: 2rem; /* Increase gap slightly */
+    }
+    .footer-navigation {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+     .newsletter-form .input-group {
+         flex-direction: column; /* Stack input and button */
+         width: 100%;
+         align-items: stretch; /* Make them full width */
+     }
+     .newsletter-form input[type="email"] {
+         border-radius: 4px 4px 0 0; /* Top corners */
+         border-right: 1px solid var(--medium-grey); /* Add border back */
+         margin-bottom: 5px; /* Space between input and button */
+         text-align: center;
+     }
+     .newsletter-form button {
+         border-radius: 0 0 4px 4px; /* Bottom corners */
+     }
+
+     .modal-content {
+         width: 90%;
+         margin: 15% auto; /* Adjust margin for mobile */
+         padding: 20px;
+     }
+     .modal h2 {
+         font-size: 1.5rem;
+     }
+}
+
+/* Technical Improvement: Comments for maintainers */
+/*
+  - Image Optimization: Use optimized formats (WebP/AVIF w/ fallbacks), `srcset` for responsive sizes, and `loading="lazy"`. Ensure descriptive `alt` text.
+  - Performance: Minify this CSS and the JS file (`script.js`) before deployment.
+  - Font Awesome: Consider using a subset or hosting locally if load times are critical.
+*/
