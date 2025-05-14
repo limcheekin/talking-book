@@ -1,172 +1,199 @@
-// script.js
+// script.js for Talking Book Website
 
-// Wait for the DOM to be fully loaded before running scripts
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Modal Functionality ---
+    const modalTriggers = document.querySelectorAll('[data-modal-target]');
+    const modals = document.querySelectorAll('.modal');
+    const modalCloses = document.querySelectorAll('.modal-close');
+    const body = document.body;
+    let previouslyFocusedElement;
 
-    // Back to Top Button Functionality
+    // Function to open a modal
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            previouslyFocusedElement = document.activeElement; // Save current focus
+            modal.removeAttribute('hidden');
+            modal.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            modal.classList.add('opacity-100', 'scale-100');
+            body.classList.add('overflow-hidden'); // Prevent background scrolling
+
+            // Focus the modal itself or the first focusable element within it
+            const focusableElements = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+            } else {
+                modal.focus(); // Fallback to modal container
+            }
+        }
+    }
+
+    // Function to close a modal
+    function closeModal(modal) {
+        if (modal) {
+            modal.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            modal.classList.remove('opacity-100', 'scale-100');
+            setTimeout(() => modal.setAttribute('hidden', 'true'), 300); // Wait for transition
+            body.classList.remove('overflow-hidden');
+
+            if (previouslyFocusedElement) {
+                previouslyFocusedElement.focus(); // Restore focus
+            }
+        }
+    }
+
+    modalTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            const modalId = trigger.getAttribute('data-modal-target');
+            openModal(modalId);
+        });
+    });
+
+    modalCloses.forEach(closeButton => {
+        closeButton.addEventListener('click', () => {
+            const modal = closeButton.closest('.modal');
+            closeModal(modal);
+        });
+    });
+
+    // Close modal on clicking outside the modal content
+    modals.forEach(modal => {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) { // Check if click is on the backdrop
+                closeModal(modal);
+            }
+        });
+    });
+
+    // Close modal on Escape key press
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            const openModal = document.querySelector('.modal:not([hidden])');
+            if (openModal) {
+                closeModal(openModal);
+            }
+        }
+    });
+
+    // --- Back to Top Button ---
     const backToTopButton = document.getElementById('back-to-top');
     if (backToTopButton) {
         window.addEventListener('scroll', () => {
-            // Use pageYOffset for broader compatibility, fallback to documentElement.scrollTop
-            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollPosition > 300) { // Show button after scrolling 300px
-                backToTopButton.classList.add('show');
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopButton.classList.add('opacity-100');
             } else {
-                backToTopButton.classList.remove('show');
+                backToTopButton.classList.add('opacity-0');
+                // Delay pointer-events-none to allow fade-out transition
+                setTimeout(() => {
+                     if (window.scrollY <= 300) { // Re-check in case user scrolled back up fast
+                        backToTopButton.classList.add('pointer-events-none');
+                     }
+                }, 300);
             }
         });
-        // Smooth scroll is handled by CSS `html { scroll-behavior: smooth; }`
-        // If CSS smooth scroll isn't supported or desired, add JS scroll logic here.
-    }
 
-    // Modal Functionality
-    const modalTriggers = document.querySelectorAll('[data-modal-target]');
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('.modal-close');
-    let previouslyFocusedElement = null; // To restore focus after closing modal
-
-    function openModal(modal) {
-        if (modal) {
-            previouslyFocusedElement = document.activeElement; // Store focus
-            modal.style.display = 'block';
-            // Accessibility: Focus the close button or the modal container itself
-            const focusableElement = modal.querySelector('.modal-close') || modal;
-            if(focusableElement) {
-                 // Delay focus slightly to ensure modal is fully rendered
-                 setTimeout(() => focusableElement.focus(), 50);
-            }
-             // Trap focus inside the modal (more advanced accessibility enhancement)
-             // Add event listener for Tab key to cycle through focusable elements within modal
-             // (Implementation omitted for brevity but recommended for production)
-        }
-    }
-
-    function closeModal(modal) {
-         if (modal) {
-            modal.style.display = 'none';
-            // Accessibility: Restore focus to the element that opened the modal
-            if(previouslyFocusedElement) {
-                 previouslyFocusedElement.focus();
-                 previouslyFocusedElement = null; // Reset
-            }
-         }
-    }
-
-    // Add click listeners to all modal triggers
-    modalTriggers.forEach(trigger => {
-        trigger.addEventListener('click', function(e) {
-            e.preventDefault();
-            const modalId = this.getAttribute('data-modal-target');
-            const modal = document.getElementById(modalId);
-            openModal(modal);
+        backToTopButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 
-    // Add click listeners to all close buttons
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            closeModal(this.closest('.modal'));
-        });
-    });
+    // --- Newsletter Form ---
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterFeedback = document.getElementById('newsletter-feedback');
 
-    // Close modal if user clicks outside the modal content (on the overlay)
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal')) {
-            closeModal(e.target);
-        }
-    });
-
-    // Close modal with Escape key
-    window.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' || e.key === 'Esc') { // Handle both variations
-            const openModals = document.querySelectorAll('.modal[style*="display: block"]');
-            // Close the topmost open modal if multiple could be open (unlikely here)
-            if(openModals.length > 0) {
-                closeModal(openModals[openModals.length - 1]);
-            }
-        }
-    });
-
-    // Enhanced Newsletter Form Handler
-    const newsletterForm = document.querySelector('.newsletter-form form');
     if (newsletterForm) {
-        const emailInput = newsletterForm.querySelector('input[type="email"]');
-        const messageDiv = newsletterForm.querySelector('.form-message');
-
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Clear previous messages
-            if (messageDiv) {
-                messageDiv.textContent = '';
-                messageDiv.className = 'form-message'; // Reset classes
-            }
-            if (!emailInput || !messageDiv) return; // Exit if elements missing
-
+        newsletterForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent actual submission for this demo
+            const emailInput = newsletterForm.querySelector('#email-sub');
             const email = emailInput.value.trim();
 
-            // Basic validation
-            if (!email || !validateEmail(email)) {
-                messageDiv.textContent = 'Please enter a valid email address.';
-                messageDiv.classList.add('error');
-                emailInput.focus(); // Focus the input for correction
+            // Basic email validation
+            if (!email) {
+                displayNewsletterFeedback('Please enter your email address.', 'text-red-500');
+                emailInput.focus();
+                return;
+            } else if (!isValidEmail(email)) {
+                displayNewsletterFeedback('Please enter a valid email address.', 'text-red-500');
+                emailInput.focus();
                 return;
             }
 
-            // --- Placeholder for actual form submission ---
-            // Here you would typically use fetch() to send data to your server/service
-            // fetch('/api/subscribe', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ email: email })
-            // })
-            // .then(response => response.json())
-            // .then(data => {
-            //     if (data.success) {
-            //         messageDiv.textContent = 'Thank you for subscribing!';
-            //         messageDiv.classList.add('success');
-            //         emailInput.value = ''; // Clear input on success
-            //     } else {
-            //         messageDiv.textContent = data.message || 'Subscription failed. Please try again.';
-            //         messageDiv.classList.add('error');
-            //     }
-            // })
-            // .catch(error => {
-            //     console.error('Subscription error:', error);
-            //     messageDiv.textContent = 'An error occurred. Please try again later.';
-            //     messageDiv.classList.add('error');
-            // });
-
-            // --- Simulation for this example ---
-            console.log(`Simulating subscription for: ${email}`);
-            // Simulate network delay
-            newsletterForm.querySelector('button').disabled = true; // Disable button during processing
+            // Simulate form submission (replace with actual AJAX call)
+            displayNewsletterFeedback('Subscribing...', 'text-blue-500');
             setTimeout(() => {
                 // Simulate success
-                messageDiv.textContent = `Thank you! ${email} has been added. (Demo)`;
-                messageDiv.classList.add('success');
+                displayNewsletterFeedback('Thanks for subscribing! Please check your email to confirm.', 'text-green-500');
                 emailInput.value = ''; // Clear input
-                newsletterForm.querySelector('button').disabled = false; // Re-enable button
-                // Simulate error (uncomment to test error state)
-                // messageDiv.textContent = 'Failed to subscribe. Please try again. (Demo)';
-                // messageDiv.classList.add('error');
-                // newsletterForm.querySelector('button').disabled = false;
-            }, 1000); // 1 second delay
 
+                // Simulate error (uncomment to test error case)
+                // displayNewsletterFeedback('Subscription failed. Please try again.', 'text-red-500');
+            }, 1500);
         });
     }
 
-    // Basic email validation function
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
+    function isValidEmail(email) {
+        // Basic regex for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
-}); // End DOMContentLoaded
+    function displayNewsletterFeedback(message, className) {
+        if (newsletterFeedback) {
+            newsletterFeedback.textContent = message;
+            newsletterFeedback.className = `mt-2 text-sm ${className}`; // Reset classes and add new one
+        }
+    }
 
-/* Technical Improvement: Comments for maintainers */
-/*
-  - Performance: Minify this file before deployment.
-  - AJAX Submission: Replace the form submission simulation with actual fetch() calls.
-  - Focus Trapping: Implement focus trapping within modals for enhanced accessibility.
-*/
+    // --- Update Copyright Year ---
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- Smooth Scroll for Skip Link (if not handled by html.scroll-smooth) ---
+    // Tailwind's `scroll-smooth` on <html> should handle this, but as a fallback:
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                // Optionally, set focus to the main content after scrolling
+                targetElement.setAttribute('tabindex', '-1'); // Make it focusable
+                targetElement.focus();
+            }
+        });
+    }
+
+    // --- Animate elements on scroll ---
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: unobserve after animation to save resources
+                // observer.unobserve(entry.target);
+            } else {
+                // Optional: remove class if you want animation to repeat when scrolling up and down
+                // entry.target.classList.remove('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+
+});
