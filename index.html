@@ -19,11 +19,23 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#1E40AF', // Example: Blue-700
-                        secondary: '#DB2777', // Example: Pink-600
-                        lightgray: '#f0f4f8',
-                        mediumgray: '#9ca3af',
-                        darkgray: '#374151',
+                        // Elegant and Professional Color Palette
+                        primary: tailwind.colors.slate[700],      // #334155
+                        'primary-hover': tailwind.colors.slate[800], // #1E293B
+                        secondary: tailwind.colors.amber[600],    // #D97706
+                        'secondary-hover': tailwind.colors.amber[700], // #B45309
+                        
+                        lightgray: tailwind.colors.slate[100],    // #F1F5F9 (Main page background)
+                        mediumgray: tailwind.colors.slate[500],   // #64748B (Subtle text, borders)
+                        darkgraytext: tailwind.colors.slate[700], // #334155 (Primary text, slightly softer than darkest)
+                        darkbackground: tailwind.colors.slate[800], // #1E293B (Footer background)
+                        
+                        'status-red': tailwind.colors.red[500],
+                        'status-green': tailwind.colors.green[500],
+                        'status-blue': tailwind.colors.blue[500], 
+                    },
+                    aspectRatio: { // Added for responsive video embeds
+                        '16/9': '16 / 9',
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
@@ -50,86 +62,69 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="css/style.css">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Talking Book",
-      "url": "https://www.talkingbook.com/",
+      "url": "https://www.talkingbook.com/", 
       "description": "Making books less boring by unlocking book ideas through conversations, summaries, songs, and AI chats.",
       "publisher": {
         "@type": "Organization",
         "name": "Talking Book",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.talkingbook.com/images/logo.png"
+          "url": "https://www.talkingbook.com/images/logo.png" 
         }
       },
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://www.talkingbook.com/search?q={search_term_string}",
+        "target": "https://www.talkingbook.com/search?q={search_term_string}", 
         "query-input": "required name=search_term_string"
       }
     }
     </script>
-    <style>
-        /* Basic styling for skip link (visible on focus) */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #000;
-            color: white;
-            padding: 8px;
-            z-index: 100;
-            transition: top 0.3s;
-        }
-        .skip-link:focus {
-            top: 0;
-        }
-        /* Custom animation classes if needed beyond Tailwind's capabilities */
-        .animate-on-scroll {
-            opacity: 0;
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-        }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .animate-on-scroll.fade-in-up {
-            transform: translateY(30px);
-        }
-         /* Ensure modals are above other content */
-        .modal {
-            z-index: 50; /* Tailwind's z-index scale goes up to 50 */
-        }
-        #back-to-top {
-            z-index: 40;
-        }
-    </style>
-</head>
-<body class="font-sans bg-lightgray text-darkgray antialiased">
+    </head>
+<body class="font-sans bg-lightgray text-darkgraytext antialiased">
     <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-md focus:shadow-lg focus:z-50">Skip to main content</a>
 
     <header class="bg-primary text-white py-12 shadow-lg">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center items-center mb-4">
-                <img src="https://placehold.co/150x50/ffffff/1E40AF?text=Talking+Book&font=Inter" alt="Talking Book Logo" class="h-12 mr-3">
+                <img src="https://placehold.co/150x50/FFFFFF/334155?text=Talking+Book&font=Inter" alt="Talking Book Logo" class="h-12 mr-3">
                 <a href="#" aria-label="Talking Book Home" class="text-4xl font-bold tracking-tight hover:text-secondary transition-colors">Talking Book</a>
             </div>
             <h1 class="text-5xl font-bold mb-3 animate-fade-in-up">Making Books Less Boring</h1>
-            <p class="text-xl mb-6 text-blue-200 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">Unlock book ideas faster and have more fun doing it. We turn complex books into engaging conversations, summaries, songs, and AI chats.</p>
-            <p class="text-md mb-8 text-blue-300 animate-fade-in-up" style="animation-delay: 0.3s;">Join hundreds exploring new ways to learn from non-fiction books!</p>
-            <a href="https://www.youtube.com/@talkingbookchannel" class="bg-secondary hover:bg-pink-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform transform hover:scale-105 inline-flex items-center text-lg animate-fade-in-up" style="animation-delay: 0.4s;" target="_blank" rel="noopener noreferrer" title="Visit the Talking Book YouTube Channel (opens in new tab)">
+            <p class="text-xl mb-6 text-slate-300 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">Unlock book ideas faster and have more fun doing it. We turn complex books into engaging conversations, summaries, songs, and AI chats.</p>
+            <p class="text-md mb-8 text-slate-400 animate-fade-in-up" style="animation-delay: 0.3s;">Join hundreds exploring new ways to learn from non-fiction books!</p>
+            <a href="https://www.youtube.com/@talkingbookchannel" class="bg-secondary hover:bg-secondary-hover text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform transform hover:scale-105 inline-flex items-center text-lg animate-fade-in-up" style="animation-delay: 0.4s;" target="_blank" rel="noopener noreferrer" title="Visit the Talking Book YouTube Channel (opens in new tab)">
                 <i class="fab fa-youtube mr-2"></i> Visit Our YouTube Channel
             </a>
         </div>
     </header>
 
+    <section class="py-12 bg-slate-200 animate-on-scroll fade-in-up">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-8 text-primary">Featured Video</h2>
+            <div class="max-w-3xl mx-auto bg-black rounded-lg shadow-xl overflow-hidden">
+                <div class="responsive-iframe-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Featured Talking Book Video" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <main id="main-content" class="container mx-auto px-6 py-12">
         <section class="mb-16 animate-on-scroll fade-in-up">
             <h2 class="text-3xl font-bold text-center mb-4 text-primary flex items-center justify-center"><i class="fas fa-info-circle mr-3 text-secondary" aria-hidden="true"></i>About Talking Book</h2>
-            <div class="max-w-3xl mx-auto text-lg space-y-4 text-gray-700">
+            <div class="max-w-3xl mx-auto text-lg space-y-4 text-slate-600"> 
                 <p>Welcome to Talking Book (formerly Bookcast AI Podcast)! Tired of dense text or struggling to find time to read? We focus primarily on insightful non-fiction, business, and self-improvement books, transforming key concepts into accessible and engaging formats. We believe understanding shouldn't be a chore.</p>
                 <p>Whether it's a quick overview, a deep dive into a specific chapter, a catchy song encapsulating core ideas, or an interactive chat with a book's AI persona, we help you connect with knowledge in a fresh, memorable way.</p>
                 <p class="mt-4 text-md italic text-primary">New book overviews and deep dives are released weekly – subscribe to stay updated!</p>
@@ -140,85 +135,106 @@
             <h2 class="text-3xl font-bold text-center mb-10 text-primary flex items-center justify-center"><i class="fas fa-lightbulb mr-3 text-secondary" aria-hidden="true"></i>Our Content Formats</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col animate-on-scroll fade-in-up">
-                    <img src="https://placehold.co/600x400/DB2777/FFFFFF?text=Book+Overviews&font=Inter" alt="Book Overviews Thumbnail" class="rounded-md mb-4 w-full h-48 object-cover">
+                    <div class="mb-4 rounded-md overflow-hidden responsive-iframe-container bg-slate-300">
+                         <iframe 
+                            src="https://www.youtube.com/embed/YOUR_OVERVIEW_VIDEO_ID" title="Talking Book - Book Overviews Preview" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
                     <h3 class="text-xl font-semibold mb-2 text-primary flex items-center"><i class="fas fa-book-open mr-2 text-secondary" aria-hidden="true"></i>Book Overviews</h3>
-                    <p class="text-gray-600 mb-4 flex-grow">Concise summaries covering the entire book, highlighting key concepts and takeaways in an easy-to-digest conversational format.</p>
-                    <a href="https://www.youtube.com/playlist?list=YOUR_OVERVIEWS_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Watch Book Overviews Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
-                        <i class="fas fa-play-circle mr-2" aria-hidden="true"></i> Watch Overviews <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    <p class="text-slate-600 mb-4 flex-grow">Concise summaries covering the entire book, highlighting key concepts and takeaways in an easy-to-digest conversational format.</p>
+                    <a href="https://www.youtube.com/playlist?list=YOUR_OVERVIEWS_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Watch Book Overviews Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-primary-hover text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
+                        <i class="fas fa-play-circle mr-2" aria-hidden="true"></i> Watch Playlist <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </article>
 
                 <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col animate-on-scroll fade-in-up" style="animation-delay: 0.1s;">
-                    <img src="https://placehold.co/600x400/1E40AF/FFFFFF?text=Chapter+Deep+Dives&font=Inter" alt="Chapter Deep Dives Thumbnail" class="rounded-md mb-4 w-full h-48 object-cover">
+                    <div class="mb-4 rounded-md overflow-hidden responsive-iframe-container bg-slate-300">
+                        <iframe 
+                            src="https://www.youtube.com/embed/YOUR_DEEPDIVE_VIDEO_ID" title="Talking Book - Chapter Deep Dives Preview" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
                     <h3 class="text-xl font-semibold mb-2 text-primary flex items-center"><i class="fas fa-layer-group mr-2 text-secondary" aria-hidden="true"></i>Chapter Deep Dives</h3>
-                    <p class="text-gray-600 mb-1 flex-grow">In-depth explorations focusing on specific chapters, breaking down detailed concepts and insights piece by piece.</p>
-                    <span class="inline-block bg-yellow-200 text-yellow-800 text-xs font-semibold px-2 py-1 rounded-full mb-3 self-start">Featured Series:</span>
-                    <a href="https://www.youtube.com/playlist?list=YOUR_MDW_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Watch Million Dollar Weekend Deep Dive Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
+                    <p class="text-slate-600 mb-1 flex-grow">In-depth explorations focusing on specific chapters, breaking down detailed concepts and insights piece by piece.</p>
+                    <span class="inline-block bg-amber-100 text-amber-700 text-xs font-semibold px-2 py-1 rounded-full mb-3 self-start">Featured Series:</span>
+                    <a href="https://www.youtube.com/playlist?list=YOUR_DEEPDIVES_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Watch Million Dollar Weekend Deep Dive Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-primary-hover text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
                         <i class="fas fa-list-ol mr-2" aria-hidden="true"></i> Million Dollar Weekend <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </article>
 
                 <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col animate-on-scroll fade-in-up" style="animation-delay: 0.2s;">
-                    <img src="https://placehold.co/600x400/DB2777/FFFFFF?text=Book+Songs&font=Inter" alt="Book Songs Thumbnail" class="rounded-md mb-4 w-full h-48 object-cover">
+                     <div class="mb-4 rounded-md overflow-hidden responsive-iframe-container bg-slate-300">
+                        <iframe 
+                            src="https://www.youtube.com/embed/YOUR_SONG_VIDEO_ID" title="Talking Book - Book Songs Preview" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
                     <h3 class="text-xl font-semibold mb-2 text-primary flex items-center"><i class="fas fa-music mr-2 text-secondary" aria-hidden="true"></i>Book Songs</h3>
-                    <p class="text-gray-600 mb-4 flex-grow">Creative and catchy musical interpretations of core book concepts, making learning more fun and memorable.</p>
-                    <a href="https://www.youtube.com/playlist?list=YOUR_SONGS_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Listen to Book Songs Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
-                        <i class="fas fa-headphones mr-2" aria-hidden="true"></i> Listen to Songs <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    <p class="text-slate-600 mb-4 flex-grow">Creative and catchy musical interpretations of core book concepts, making learning more fun and memorable.</p>
+                    <a href="https://www.youtube.com/playlist?list=YOUR_SONGS_PLAYLIST_ID" target="_blank" rel="noopener noreferrer" title="Listen to Book Songs Playlist on YouTube (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-primary-hover text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
+                        <i class="fas fa-headphones mr-2" aria-hidden="true"></i> Listen to Playlist <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </article>
 
                 <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 flex flex-col animate-on-scroll fade-in-up" style="animation-delay: 0.3s;">
-                    <img src="https://placehold.co/600x400/1E40AF/FFFFFF?text=AI+Chats&font=Inter" alt="AI Chats Thumbnail" class="rounded-md mb-4 w-full h-48 object-cover">
+                    <img src="https://placehold.co/600x400/334155/FFFFFF?text=AI+Chats&font=Inter" alt="AI Chats Illustration" class="rounded-md mb-4 w-full h-48 object-cover">
                     <h3 class="text-xl font-semibold mb-2 text-primary flex items-center"><i class="fas fa-comments mr-2 text-secondary" aria-hidden="true"></i>AI Chats</h3>
-                    <p class="text-gray-600 mb-1 flex-grow">Engage directly with book content through interactive, text-based conversations with AI representations of the books on platforms like Telegram.</p>
-                    <span class="inline-block bg-green-200 text-green-800 text-xs font-semibold px-2 py-1 rounded-full mb-3 self-start">Featured Chat:</span>
-                    <a href="https://t.me/think_and_grow_rich_bot" target="_blank" rel="noopener noreferrer" title="Chat with Think and Grow Rich AI on Telegram (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
+                    <p class="text-slate-600 mb-1 flex-grow">Engage directly with book content through interactive, text-based conversations with AI representations of the books on platforms like Telegram.</p>
+                    <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full mb-3 self-start">Featured Chat:</span> 
+                    <a href="https://t.me/think_and_grow_rich_bot" target="_blank" rel="noopener noreferrer" title="Chat with Think and Grow Rich AI on Telegram (opens in new tab)" class="mt-auto self-start bg-primary hover:bg-primary-hover text-white font-medium py-2 px-4 rounded-lg transition-colors inline-flex items-center">
                        <i class="fab fa-telegram-plane mr-2" aria-hidden="true"></i> Chat on Telegram <i class="fas fa-arrow-right ml-1 text-xs"></i>
                     </a>
                 </article>
             </div>
-            <p class="mt-10 text-center text-lg text-gray-700">Explore the content formats and <a href="https://www.youtube.com/@talkingbookchannel?sub_confirmation=1" target="_blank" rel="noopener noreferrer" title="Subscribe to Talking Book on YouTube (opens in new tab)" class="text-secondary hover:text-pink-700 font-semibold underline">subscribe on YouTube</a> to never miss an update!</p>
+            <p class="mt-10 text-center text-lg text-slate-700">Explore the content formats and <a href="https://www.youtube.com/@talkingbookchannel?sub_confirmation=1" target="_blank" rel="noopener noreferrer" title="Subscribe to Talking Book on YouTube (opens in new tab)" class="text-secondary hover:text-secondary-hover font-semibold underline">subscribe on YouTube</a> to never miss an update!</p>
         </section>
     </main>
 
-    <footer class="bg-darkgray text-gray-300 pt-16 pb-8">
+    <footer class="bg-darkbackground text-slate-300 pt-16 pb-8">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-8 mb-8">
                 <div class="animate-on-scroll fade-in-up">
                     <h3 class="text-xl font-semibold mb-3 text-white">Stay Updated</h3>
-                    <p class="mb-4 text-gray-400">Get notified about new content & insights directly to your inbox.</p>
+                    <p class="mb-4 text-slate-400">Get notified about new content & insights directly to your inbox.</p>
                     <form id="newsletter-form" action="YOUR_SERVER_NEWSLETTER_ENDPOINT" method="post" novalidate>
                         <label for="email-sub" class="sr-only">Email for newsletter</label>
                         <div class="flex flex-col sm:flex-row gap-2">
-                            <input type="email" id="email-sub" name="email" placeholder="Enter your email" required aria-label="Email for newsletter subscription" aria-describedby="newsletter-feedback" class="flex-grow px-4 py-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none">
-                            <button type="submit" class="bg-secondary hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md">Subscribe</button>
+                            <input type="email" id="email-sub" name="email" placeholder="Enter your email" required aria-label="Email for newsletter subscription" aria-describedby="newsletter-feedback" class="flex-grow px-4 py-3 rounded-lg bg-slate-700 text-white border border-slate-600 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none placeholder-slate-400">
+                            <button type="submit" class="bg-secondary hover:bg-secondary-hover text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md">Subscribe</button>
                         </div>
-                        <div id="newsletter-feedback" class="mt-2 text-sm" aria-live="polite"></div>
+                        <div id="newsletter-feedback" class="mt-2 text-sm" aria-live="polite"></div> 
                     </form>
                 </div>
 
                 <div class="animate-on-scroll fade-in-up md:text-right" style="animation-delay: 0.1s;">
                     <h3 class="text-xl font-semibold mb-3 text-white">Connect & Explore</h3>
                     <nav class="social-links mb-4" aria-label="Social media links">
-                        <a href="https://www.youtube.com/@talkingbookchannel" target="_blank" rel="noopener noreferrer" title="Talking Book on YouTube" aria-label="YouTube" class="text-gray-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-youtube"></i></a>
-                        <a href="https://twitter.com/talkingbook" target="_blank" rel="noopener noreferrer" title="Talking Book on Twitter" aria-label="Twitter" class="text-gray-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/talkingbook" target="_blank" rel="noopener noreferrer" title="Talking Book on Facebook" aria-label="Facebook" class="text-gray-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-facebook-f"></i></a>
-                        <a href="mailto:contact@talkingbook.com" title="Contact Talking Book via Email" aria-label="Email" class="text-gray-400 hover:text-secondary text-2xl transition-colors"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.youtube.com/@talkingbookchannel" target="_blank" rel="noopener noreferrer" title="Talking Book on YouTube" aria-label="YouTube" class="text-slate-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-youtube"></i></a>
+                        <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Talking Book on Twitter" aria-label="Twitter" class="text-slate-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Talking Book on Facebook" aria-label="Facebook" class="text-slate-400 hover:text-secondary text-2xl mr-4 transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="mailto:contact@talkingbook.com" title="Contact Talking Book via Email" aria-label="Email" class="text-slate-400 hover:text-secondary text-2xl transition-colors"><i class="fas fa-envelope"></i></a>
                     </nav>
                     <nav class="footer-links" aria-label="Footer legal links">
-                         <p class="text-sm text-gray-400">By interacting with our content (e.g., AI chats), you agree to our
-                            <a href="#" data-modal-target="terms-modal" aria-label="View Terms and Conditions" class="text-gray-300 hover:text-secondary underline">Terms</a> and
-                            <a href="#" data-modal-target="privacy-modal" aria-label="View Privacy Policy" class="text-gray-300 hover:text-secondary underline">Privacy Policy</a>.
+                         <p class="text-sm text-slate-400">By interacting with our content (e.g., AI chats), you agree to our
+                            <a href="#" data-modal-target="terms-modal" aria-label="View Terms and Conditions" class="text-slate-300 hover:text-secondary underline">Terms</a> and
+                            <a href="#" data-modal-target="privacy-modal" aria-label="View Privacy Policy" class="text-slate-300 hover:text-secondary underline">Privacy Policy</a>.
                         </p>
                     </nav>
                 </div>
             </div>
-            <hr class="border-gray-700 my-6">
-            <p class="text-center text-sm text-gray-500">&copy; <span id="current-year">2025</span> Talking Book. All rights reserved.</p>
+            <hr class="border-slate-700 my-6">
+            <p class="text-center text-sm text-slate-500">© <span id="current-year">2025</span> Talking Book. All rights reserved.</p>
         </div>
     </footer>
 
-    <a href="#top" id="back-to-top" title="Back to Top" aria-label="Scroll back to top" class="fixed bottom-6 right-6 bg-secondary hover:bg-pink-700 text-white p-3 rounded-full shadow-lg transition-opacity opacity-0 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+    <a href="#top" id="back-to-top" title="Back to Top" aria-label="Scroll back to top" class="fixed bottom-6 right-6 bg-secondary hover:bg-secondary-hover text-white p-3 rounded-full shadow-lg transition-opacity opacity-0 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
         <i class="fas fa-arrow-up text-xl" aria-hidden="true"></i>
     </a>
 
@@ -226,10 +242,10 @@
         <div class="modal-content bg-white p-6 sm:p-8 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 ease-in-out">
             <div class="flex justify-between items-center mb-4">
                 <h2 id="terms-heading" class="text-2xl font-bold text-primary">Terms and Conditions</h2>
-                <button class="modal-close text-gray-500 hover:text-darkgray text-2xl" aria-label="Close Terms and Conditions Modal">&times;</button>
+                <button class="modal-close text-slate-500 hover:text-slate-700 text-2xl" aria-label="Close Terms and Conditions Modal">×</button>
             </div>
-            <div class="prose max-w-none text-gray-700">
-                <p class="text-sm text-gray-500"><strong>Last Updated: May 14, 2025</strong></p>
+            <div class="prose max-w-none text-slate-700"> 
+                <p class="text-sm text-slate-500"><strong>Last Updated: May 14, 2025</strong></p>
                 <p>Welcome to Talking Book! These terms and conditions outline the rules and regulations for the use of Talking Book's Website and Content, located at https://www.talkingbook.com/.</p>
                 <p>By accessing this website and consuming our content, we assume you accept these terms and conditions. Do not continue to use Talking Book if you do not agree to take all of the terms and conditions stated on this page.</p>
                 
@@ -284,11 +300,11 @@
         <div class="modal-content bg-white p-6 sm:p-8 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 ease-in-out">
             <div class="flex justify-between items-center mb-4">
                 <h2 id="privacy-heading" class="text-2xl font-bold text-primary">Privacy Policy</h2>
-                <button class="modal-close text-gray-500 hover:text-darkgray text-2xl" aria-label="Close Privacy Policy Modal">&times;</button>
+                <button class="modal-close text-slate-500 hover:text-slate-700 text-2xl" aria-label="Close Privacy Policy Modal">×</button>
             </div>
-            <div class="prose max-w-none text-gray-700">
-                <p class="text-sm text-gray-500"><strong>Last Updated: May 14, 2025</strong></p>
-                <p>Talking Book ("us", "we", or "our") operates the https://www.talkingbook.com/ website and the Talking Book services (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+            <div class="prose max-w-none text-slate-700">
+                <p class="text-sm text-slate-500"><strong>Last Updated: May 14, 2025</strong></p>
+                <p>Talking Book ("us", "we", "our") operates the https://www.talkingbook.com/ website and the Talking Book services (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
 
                 <h4>1. Information Collection and Use</h4>
                 <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
