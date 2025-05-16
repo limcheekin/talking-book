@@ -51,7 +51,7 @@ And our YouTube Channel: [Talking Book on YouTube](https://www.youtube.com/%40Ta
 
 ```
 
-limcheekin-talking-book/
+talking-book/
 ├── README.md
 ├── index.html
 ├── LICENSE
@@ -61,7 +61,7 @@ limcheekin-talking-book/
 │   └── style.css
 ├── images/
 │   ├── logo.png
-│   ├── telegram\_bot.png
+│   ├── telegram_bot.png
 │   └── favicon/
 │       ├── site.webmanifest
 │       ├── favicon.ico
@@ -74,8 +74,6 @@ limcheekin-talking-book/
 └── deploy.yaml
 
 ```
-
-*(Note: `logo.png` and `telegram_bot.png` were inferred from `index.html` usage. Favicon files were inferred from `index.html` and `site.webmanifest`)*
 
 ## Getting Started
 
@@ -100,11 +98,6 @@ This project is licensed under the **MIT License**.
 Copyright (c) 2025 Lim Chee Kin
 
 See the [LICENSE](LICENSE) file for more details.
-
-## Author & Contact
-
-  * **Author**: Lim Chee Kin
-  * **YouTube**: [Talking Book](https://www.youtube.com/%40TalkingBookYT)
 
 ## Acknowledgements
 
