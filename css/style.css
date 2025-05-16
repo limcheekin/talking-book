@@ -1,0 +1,153 @@
+/* css/style.css */
+
+/* ... (previous styles remain the same) ... */
+
+/* Styling for the fixed theme toggle container */
+#theme-toggle-container {
+    position: fixed;
+    top: 1rem; /* 16px */
+    right: 1rem; /* 16px */
+    z-index: 50; /* Ensure it's above most content but below modals if they overlap */
+}
+
+#dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem; /* 40px */
+    height: 2.5rem; /* 40px */
+    border-radius: 9999px; /* full */
+}
+
+#dark-mode-toggle .fa-sun,
+#dark-mode-toggle .fa-moon {
+    font-size: 1.25rem; /* text-xl */
+}
+
+
+/* Basic styling for skip link (visible on focus) */
+.skip-link {
+    position: absolute;
+    top: -9999px; /* Hidden off-screen */
+    left: 0;
+    background: #1E293B; /* Fallback, will be overridden by Tailwind focus style */
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s ease-out;
+}
+.skip-link:focus-visible {
+    top: 0.5rem;
+    left: 0.5rem;
+}
+
+/* Custom animation classes */
+.animate-on-scroll {
+    opacity: 0;
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.animate-on-scroll.fade-in-up {
+    transform: translateY(30px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll,
+  .motion-safe\:hover\:-translate-y-1:hover, /* etc. */
+  .motion-reduce\:animate-none {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}
+
+.modal { z-index: 60; /* Higher than theme toggle */ }
+#back-to-top { z-index: 40; }
+
+.responsive-iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%;
+    background-color: #e2e8f0;
+    background-image:
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05)),
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.05) 75%, rgba(0,0,0,0.05));
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dark .responsive-iframe-container {
+    background-color: #334155;
+    background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05)),
+        linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%, rgba(255,255,255,0.05));
+}
+.responsive-iframe-container::before {
+    content: "\f144";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 3rem;
+    color: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.dark .responsive-iframe-container::before { color: rgba(255,255,255,0.2); }
+.responsive-iframe-container iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0; z-index: 2;
+}
+
+.spinner {
+    display: inline-block; width: 20px; height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+.dark .spinner-dark-bg { border: 3px solid rgba(0,0,0,.3); border-top-color: #000; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hidden { display: none !important; }
+
+/* Print Styles */
+@media print {
+    body { font-size: 12pt; line-height: 1.5; color: #000 !important; background-color: #fff !important; }
+    #theme-toggle-container, header, footer, #back-to-top, /* ... other print hidden elements */
+    .responsive-iframe-container iframe, #latest-videos .grid > div:not(:first-child),
+    .social-links, #social-share-buttons, #newsletter-form,
+    .bg-slate-200, .animate-on-scroll, .skip-link,
+    nav:not([aria-label="Footer legal links"]),
+    button:not(.modal-close) { display: none !important; }
+
+    .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+    .dark, .dark body { background-color: #fff !important; color: #000 !important; }
+    .dark .text-dark-text-primary, .dark .text-dark-text-secondary { color: #000 !important; }
+    .dark .dark\:bg-dark-card, .dark .dark\:bg-dark-bg { background-color: #fff !important; }
+    a { color: #000 !important; text-decoration: underline !important; }
+    a[href^="http"]:after, a[href^="https"]:after { content: " (" attr(href) ")"; font-size: 90%; font-style: italic; }
+    a[href^="#"]:after { content: ""; }
+    .modal-content { box-shadow: none !important; border: 1px solid #ccc; }
+    .text-primary, .text-secondary { color: #000 !important; }
+    /* Ensure prose is readable in print */
+    .prose, .prose h4, .prose p, .prose ul, .prose li { color: #000 !important; }
+}
+
+/* Tailwind's prose class for modals - using provided styles from user's original html */
+.prose h4 {
+    @apply text-lg font-semibold mt-4 text-primary dark:text-dark-text-primary;
+}
+.prose p {
+    @apply mb-2;
+}
+.prose ul {
+    @apply list-disc list-inside ml-4 space-y-1;
+}
+/* Add any other specific prose styles if needed */
