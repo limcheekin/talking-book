@@ -1,6 +1,6 @@
 # Talking Book
 
-The official website for **The Talking Book** YouTube channel, dedicated to "Unlock book ideas through conversations". We help you unlock ideas from non-fiction, business, and self-improvement books through engaging conversations, chapter deep dives, book songs, and interactive AI chats.
+The official website for **The Talking Book** YouTube channel, dedicated to "Making Books Less Boring". We help you unlock ideas from non-fiction, business, and self-improvement books through engaging conversations, chapter deep dives, book songs, and interactive AI chats.
 
 Visit the live website: [https://limcheekin.github.io/talking-book/](https://limcheekin.github.io/talking-book/)
 
@@ -29,7 +29,7 @@ And our YouTube Channel: [Talking Book on YouTube](https://www.youtube.com/%40Ta
   * **Book Overviews**: Concise summaries highlighting key concepts and takeaways from entire books.
   * **Chapter Deep Dives**: In-depth explorations focusing on specific chapters and detailed concepts.
   * **Book Songs**: Creative and catchy musical interpretations of core book ideas.
-  * **AI Chats**: Engage directly with book content through interactive AI personas on Telegram (e.g., "Think and Grow Rich AI").
+  * **AI Chats**: Engage directly with book content through interactive AI personas on Telegram bot (e.g., [Talking Book: Think and Grow Rich](https://t.me/think_and_grow_rich_bot)).
 
 ## Tech Stack
 
